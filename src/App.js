@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-
+import Header from './components/Header';
+import './bootstrap.min.css'
+import Home from './pages/Home';
+import Auth from './pages/Auth';
+import Profile from './pages/Profile';
+import ReadingPage from './pages/ReadingPage';
+import { useState } from 'react';
+import CreatePost from './pages/CreatePost';
+import Footer from './components/Footer'
 function App() {
+
+  const [isAuth, setIsAuth]=useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path='/home' element={<Home></Home>}></Route>
+        <Route path='/login' element={<Auth setIsAuth={setIsAuth}></Auth>}></Route>
+        <Route path='/' element={<Auth register></Auth>}></Route>
+        <Route path='/profile' element={<Profile></Profile>}></Route>
+        <Route path='/reading' element={<ReadingPage></ReadingPage>}></Route>
+        <Route path='/createpost' element={<CreatePost isAuth={isAuth}></CreatePost>}></Route>
+      </Routes>
+      <Footer></Footer>
     </div>
   );
 }
